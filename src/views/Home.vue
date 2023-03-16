@@ -5,8 +5,8 @@ import routes from '~pages';
 const router = useRouter();
 
 const links = {
-  '@ckvv': 'chenkai.life',
-  'GitHub': 'https://github.com/ckvv',
+  '@CK': 'https://ckvv.github.io/',
+  'GitHub': 'https://github.com/ckvv/vue-project',
 };
 </script>
 
@@ -21,8 +21,8 @@ const links = {
       </el-link>
       <div v-for="n in 9" :key="n" class="w-40 h-0" />
     </el-space>
-    <el-space class="h-20">
-      <el-link v-for="(value, key) in links" :key="value">
+    <el-space class="h-20" spacer="|">
+      <el-link v-for="(value, key) in links" :key="value" :href="value">
         {{ key }}
       </el-link>
     </el-space>
