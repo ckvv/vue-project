@@ -7,7 +7,7 @@ const router = useRouter();
 const route = useRoute();
 
 const path = computed(() => route.path || '');
-const options = routes.map(route => ({ label: route.name, value: route.path }));
+const options = routes.map(route => ({ label: route.name, value: route.path })) as any[];
 
 const toPath = (path = '/') => {
   router.push(path);
