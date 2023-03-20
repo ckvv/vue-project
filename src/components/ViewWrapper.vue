@@ -18,7 +18,6 @@ const toPath = (path = '/') => {
   <div class="view-wrapper w-full h-full">
     <slot />
     <span v-if="route.name !== 'Home'" class="i-b:home text-6 fixed right-2 top-2 hover:cursor-pointer" @click="toPath('/home')" />
-
     <el-select-v2
       class="fixed right-2 bottom-2"
       :model-value="path"

@@ -12,11 +12,11 @@ import { presetAttributify, presetUno } from 'unocss';
 import presetIcons from '@unocss/preset-icons';
 import { name } from './package.json';
 
-const icons = (names: string []) => {
+const loadIcons = (names: ('home')[]) => {
   return names.reduce((pre, cur) => {
     pre[cur] = readFileSync(`./src/assets/icons/${cur}.svg`).toString();
     return pre;
-  }, {} as Record<string, string>);
+  }, {} as Record<typeof names[number], string>);
 };
 
 // https://vitejs.dev/config/
@@ -32,15 +32,13 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
     UnoCSS({
-      shortcuts: {
-        'router-link': 'text-gray-4 hover:text-gray-6 truncate no-underline',
-      },
+      shortcuts: {},
       presets: [
-        presetAttributify({ /* preset options */}),
+        presetAttributify({}),
         presetUno(),
         presetIcons({
           collections: {
-            b: icons(['home']),
+            b: loadIcons(['home']),
           },
         }),
       ],
