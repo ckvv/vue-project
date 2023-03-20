@@ -17,9 +17,8 @@ const toPath = (path = '/') => {
 <template>
   <div class="view-wrapper w-full h-full">
     <slot />
-    <el-button v-if="route.name !== 'Home'" title="edit" class="fixed right-2 top-2" link @click="toPath('/home')">
-      Home
-    </el-button>
+    <span v-if="route.name !== 'Home'" class="i-b:home text-6 fixed right-2 top-2 hover:cursor-pointer" @click="toPath('/home')" />
+
     <el-select-v2
       class="fixed right-2 bottom-2"
       :model-value="path"
