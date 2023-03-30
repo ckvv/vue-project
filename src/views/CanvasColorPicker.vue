@@ -2,7 +2,7 @@
 import { computed, onMounted, shallowRef } from 'vue';
 
 const canvasRef = shallowRef<HTMLCanvasElement>();
-const color = shallowRef('');
+const color = shallowRef(new Uint8ClampedArray([0, 0, 0, 0]));
 
 const ctx = computed(() => {
   return canvasRef?.value && canvasRef.value.getContext('2d', {
@@ -98,17 +98,16 @@ const handlerChange = async (e: Event) => {
 const handlerMouseover = (event: MouseEvent) => {
   if (ctx.value && canvasRef.value) {
     const { top, left } = canvasRef.value.getBoundingClientRect();
-    const data = ctx.value.getImageData(event.x - left, event.y - top, 1, 1).data;
     // https://developer.mozilla.org/en-US/docs/Web/API/ImageData/data
-    color.value = `rgba(${data[0]} ${data[1]} ${data[2]} /${data[3]})`;
+    color.value = ctx.value.getImageData(event.x - left, event.y - top, 1, 1).data;
   }
 };
 </script>
 
 <template>
   <div>
-    <div :style="{ color }">
-      获取图片中的颜色: {{ color }}
+    <div :style="{ color: `rgba(${color[0]} ${color[1]} ${color[2]} /${color[3]})` }">
+      获取图片中的颜色: {{ color }},
       <input id="file" type="file" accept="image/*" @change="handlerChange">
     </div>
     <canvas id="offscreen" ref="canvasRef" @mousemove="handlerMouseover" />
