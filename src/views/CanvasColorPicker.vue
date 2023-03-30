@@ -108,9 +108,9 @@ const handlerMouseover = (event: MouseEvent) => {
 <template>
   <div>
     <div :style="{ color }">
-      选择一张图片获取当前颜色: {{ color }}
+      获取图片中的颜色: {{ color }}
+      <input id="file" type="file" accept="image/*" @change="handlerChange">
     </div>
-    <input id="file" type="file" accept="image/*" @change="handlerChange">
     <canvas id="offscreen" ref="canvasRef" @mousemove="handlerMouseover" />
   </div>
 </template>
