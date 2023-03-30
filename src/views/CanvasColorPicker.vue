@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, shallowRef } from 'vue';
+import { computed, onMounted, shallowRef } from 'vue';
 
 const canvasRef = shallowRef<HTMLCanvasElement>();
 const color = shallowRef('');
@@ -48,6 +48,36 @@ const loadImage = (url: string): Promise<HTMLImageElement> => {
   };
   return controller;
 };
+
+const getImageData = (w: number, h: number) => {
+  const imageData = new ImageData(w, h);
+  const length = imageData.data.length;
+  for (let i = 0; i < length; i += 4) {
+    // Percentage in the x direction, times 255
+    const x = ((i % (w * 4)) / (w * 4)) * 255;
+    // Percentage in the y direction, times 255
+    const y = (Math.ceil(i / (h * 4)) / (h)) * 255;
+
+    // Modify pixel data
+    imageData.data[i + 0] = x; // R value
+    imageData.data[i + 1] = y; // G value
+    imageData.data[i + 2] = 255 - x; // B value
+    imageData.data[i + 3] = 255; // A value
+  }
+
+  if (canvasRef.value) {
+    canvasRef.value.width = w;
+    canvasRef.value.height = h;
+  }
+
+  return imageData;
+};
+
+onMounted(() => {
+  if (ctx.value) {
+    ctx.value.putImageData(getImageData(200, 200), 0, 0);
+  }
+});
 
 const handlerChange = async (e: Event) => {
   const files = (e.target as HTMLInputElement).files;
