@@ -5,7 +5,9 @@ const canvasRef = shallowRef<HTMLCanvasElement>();
 const color = shallowRef('');
 
 const ctx = computed(() => {
-  return canvasRef?.value && canvasRef.value.getContext('2d');
+  return canvasRef?.value && canvasRef.value.getContext('2d', {
+    willReadFrequently: true,
+  });
 });
 
 const controllerFactory = <T = any>(): [Promise<T>, (result: T) => void, (error: any) => void] => {
