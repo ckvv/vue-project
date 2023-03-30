@@ -56,7 +56,7 @@ const getImageData = (w: number, h: number) => {
     // Percentage in the x direction, times 255
     const x = ((i % (w * 4)) / (w * 4)) * 255;
     // Percentage in the y direction, times 255
-    const y = (Math.ceil(i / (h * 4)) / (h)) * 255;
+    const y = (i / (w * 4) / h) * 255;
 
     // Modify pixel data
     imageData.data[i + 0] = x; // R value
