@@ -1,12 +1,14 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": [
+    "components.d.ts",
     "*.d.ts",
     "package.json",
     "src/**/*",
     "src/**/*.vue"
   ],
   "compilerOptions": {
+    "skipLibCheck": true,
+    "moduleResolution": "node",
     "ignoreDeprecations": "5.0",
     "module": "ESNext",
     "baseUrl": ".",
@@ -16,9 +18,4 @@
       ]
     }
   },
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
 }
