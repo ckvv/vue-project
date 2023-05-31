@@ -14,6 +14,7 @@ const items = computed(() => {
 </script>
 
 <template>
+  虚拟滚动, 你可以打开调试页面查看实际渲染的元素
   <input v-model="length">
   <RecycleScroller
     v-slot="{ item }"
