@@ -8,5 +8,7 @@ module.exports = {
     'no-console': 0,
     'max-statements-per-line': 0,
     'antfu/top-level-function': 0,
+    'antfu/no-cjs-exports': 0,
+    'antfu/no-ts-export-equal': 0,
   },
 };
