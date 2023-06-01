@@ -13,7 +13,6 @@ declare module '@vue/runtime-core' {
     ElSelectV2: typeof import('element-plus/es')['ElSelectV2']
     ElSpace: typeof import('element-plus/es')['ElSpace']
     RecycleScroller: typeof import('./src/components/RecycleScroller.vue')['default']
-    RecycleScroller1: typeof import('./src/components/RecycleScroller-1.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ViewWrapper: typeof import('./src/components/ViewWrapper.vue')['default']

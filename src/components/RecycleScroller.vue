@@ -14,7 +14,7 @@ const pool = computed(() => {
   return props.items.slice(unref(startIndex), unref(startIndex) + props.buffer);
 });
 
-function handleScroll(e: any) {
+function handleScroll() {
   const wrapper = wrapRef.value;
   if (wrapper) {
     startIndex.value = wrapper.scrollTop / props.itemSize;

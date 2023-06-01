@@ -1,13 +1,7 @@
-import { readFileSync } from 'node:fs';
 import { defineConfig, presetAttributify, presetUno } from 'unocss';
-import presetIcons from '@unocss/preset-icons';
+import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders';
 
-const loadIcons = (names: string[]) => {
-  return names.reduce((pre, cur) => {
-    pre[cur] = readFileSync(`./src/assets/icons/${cur}.svg`).toString();
-    return pre;
-  }, {} as Record<typeof names[number], string>);
-};
+import presetIcons from '@unocss/preset-icons';
 
 export default defineConfig({
   shortcuts: {
@@ -19,7 +13,7 @@ export default defineConfig({
     presetUno(),
     presetIcons({
       collections: {
-        b: loadIcons(['home']),
+        b: FileSystemIconLoader('./src/assets/icons'),
       },
     }),
   ],
