@@ -4,7 +4,6 @@
     "*.d.ts",
     "package.json",
     "src/**/*",
-    "src/**/*.vue"
   ],
   "compilerOptions": {
     "skipLibCheck": true,
