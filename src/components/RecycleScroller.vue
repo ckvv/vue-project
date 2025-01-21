@@ -7,17 +7,16 @@ const props = defineProps<{
   buffer: number
 }>();
 
-const wrapRef = ref<HTMLElement>();
 const startIndex = ref(0);
 
 const pool = computed(() => {
   return props.items.slice(unref(startIndex), unref(startIndex) + props.buffer);
 });
 
-function handleScroll() {
-  const wrapper = wrapRef.value;
-  if (wrapper) {
-    startIndex.value = wrapper.scrollTop / props.itemSize;
+function handleScroll(e: any) {
+  const target = e.target;
+  if (target) {
+    startIndex.value = target.scrollTop / props.itemSize;
   }
 }
 
@@ -30,7 +29,7 @@ const computedPaddingBottom = computed(() => {
 </script>
 
 <template>
-  <div ref="wrapRef" @scroll="handleScroll">
+  <div class="recycle-scroller" @scroll="handleScroll">
     <div :style="{ paddingTop: `${computedPaddingTop}px`, paddingBottom: `${computedPaddingBottom}px` }">
       <slot v-for="item in pool" :item="item" />
     </div>

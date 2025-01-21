@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
-const length = ref(1000);
+const length = ref(10000);
 
 const items = computed(() => {
-  return [...new Array(Number(length.value))].map((v, index) => {
-    return {
-      id: index,
-      msg: `${Math.random()}`,
-    };
-  });
+  return Array.from({length: length.value}).map((v, index) => ({ id: index, value: Math.random()}));
 });
 </script>
 
@@ -23,12 +18,9 @@ const items = computed(() => {
     :items="items"
     :item-size="24"
   >
-    <div>
-      <span style="color: red; line-height: 24px;">
-        {{ item.id }}:
-      </span>
+    <div class="color-red h-[24px]">
       <span>
-        {{ item.msg }}
+        {{ item.id }}: {{ item.value }}
       </span>
     </div>
   </RecycleScroller>

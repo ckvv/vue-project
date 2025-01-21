@@ -2,7 +2,8 @@
 import { computed, onMounted, shallowRef } from 'vue';
 
 const canvasRef = shallowRef<HTMLCanvasElement>();
-const color = shallowRef(new Uint8ClampedArray([0, 0, 0, 0]));
+
+const color = shallowRef(new Uint8ClampedArray([0, 0, 0, 0]) as Uint8ClampedArray<ArrayBufferLike>);
 
 const ctx = computed(() => {
   return canvasRef?.value && canvasRef.value.getContext('2d', {
