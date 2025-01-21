@@ -7,10 +7,12 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    copy: typeof import('./src/components/RecycleScroller copy.vue')['default']
     ElLink: typeof import('element-plus/es')['ElLink']
     ElSelectV2: typeof import('element-plus/es')['ElSelectV2']
     ElSpace: typeof import('element-plus/es')['ElSpace']
     RecycleScroller: typeof import('./src/components/RecycleScroller.vue')['default']
+    RecycleScroller2: typeof import('./src/components/RecycleScroller2.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ViewWrapper: typeof import('./src/components/ViewWrapper.vue')['default']

@@ -2,9 +2,9 @@
 import { computed, ref } from 'vue';
 
 const props = defineProps<{
-  items: any[]
-  itemSize: number
-  buffer: number
+  items: any[];
+  itemSize: number;
+  buffer: number;
 }>();
 
 const startIndex = ref(0);
@@ -13,11 +13,12 @@ const pool = computed(() => {
   return props.items.slice(startIndex.value, startIndex.value + props.buffer);
 });
 
-const computedPadding = computed(() => {
-  return {
-    top: startIndex.value * props.itemSize,
-    bottom: Math.max((props.items.length - props.buffer - startIndex.value), 0) * props.itemSize,
-  };
+const computedTotalHeight = computed(() => {
+  return props.items.length * props.itemSize;
+});
+
+const computedTop = computed(() => {
+  return startIndex.value * props.itemSize;
 });
 
 function handleScroll(e: Event) {
@@ -30,8 +31,12 @@ function handleScroll(e: Event) {
 
 <template>
   <div class="recycle-scroller" @scroll="handleScroll">
-    <div :style="{ paddingTop: `${computedPadding.top}px`, paddingBottom: `${computedPadding.bottom}px` }">
-      <slot v-for="item in pool" :item="item" />
+    <div :style="{ height: `${computedTotalHeight}px` }">
+      <div :style="{ transform: `translateY(${computedTop}px)` }">
+        <template v-for="item in pool">
+          <slot :item="item" />
+        </template>
+      </div>
     </div>
   </div>
 </template>

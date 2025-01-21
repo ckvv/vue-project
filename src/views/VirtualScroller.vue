@@ -11,10 +11,11 @@ const items = computed(() => {
 <template>
   虚拟滚动, 你可以打开调试页面查看实际渲染的元素
   <input v-model="length">
+  <h1>RecycleScroller</h1>
   <RecycleScroller
     v-slot="{ item }"
-    style="height: 240px; overflow: scroll;"
-    :buffer="10"
+    class="h-[240px] overflow-auto"
+    :buffer="20"
     :items="items"
     :item-size="24"
   >
@@ -24,4 +25,19 @@ const items = computed(() => {
       </span>
     </div>
   </RecycleScroller>
+
+  <h1>RecycleScroller2</h1>
+  <RecycleScroller2
+    v-slot="{ item }"
+    class="h-[240px] overflow-auto"
+    :buffer="20"
+    :items="items"
+    :item-size="24"
+  >
+    <div class="color-red h-[24px]">
+      <span>
+        {{ item.id }}: {{ item.value }}
+      </span>
+    </div>
+  </RecycleScroller2>
 </template>
