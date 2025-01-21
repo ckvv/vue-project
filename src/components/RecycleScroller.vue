@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, unref } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps<{
   items: any[]
@@ -10,7 +10,7 @@ const props = defineProps<{
 const startIndex = ref(0);
 
 const pool = computed(() => {
-  return props.items.slice(unref(startIndex), unref(startIndex) + props.buffer);
+  return props.items.slice(startIndex.value, startIndex.value + props.buffer);
 });
 
 function handleScroll(e: any) {
@@ -21,10 +21,11 @@ function handleScroll(e: any) {
 }
 
 const computedPaddingTop = computed(() => {
-  return unref(startIndex) * props.itemSize;
+  return startIndex.value * props.itemSize;
 });
+
 const computedPaddingBottom = computed(() => {
-  return (props.items.length - unref(props.buffer) - unref(startIndex)) * props.itemSize;
+  return (props.items.length - props.buffer - startIndex.value) * props.itemSize;
 });
 </script>
 
