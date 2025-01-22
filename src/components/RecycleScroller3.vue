@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useThrottleFn } from '@vueuse/core';
-import { computed, ref, useTemplateRef } from 'vue';
+import { computed, ref, useTemplateRef, watch } from 'vue';
 
 const { items, itemSize = 24, buffer = 0 } = defineProps<{
   items: any[];
@@ -56,7 +56,7 @@ function handleScroll(e: Event) {
     let top = 0;
     for (let i = 0; i < items.length; i++) {
       top += heightCache.value.get(`${items[i].key}`) || itemSize;
-      if (top > scrollTop) {
+      if (top > scrollTop || i === items.length - 1) {
         startIndex.value = i;
         break;
       }

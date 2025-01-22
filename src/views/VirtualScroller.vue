@@ -12,7 +12,7 @@ const items = computed(() => {
   虚拟滚动, 你可以打开调试页面查看实际渲染的元素
   <input v-model="length">
 
-  <!-- <h1>动态更新 paddingTop paddingBottom 实现</h1>
+  <h1>动态更新 paddingTop paddingBottom 实现</h1>
   <RecycleScroller
     v-slot="{ item }"
     class="h-[240px] overflow-auto"
@@ -40,7 +40,7 @@ const items = computed(() => {
         {{ item.id }}: {{ item.value }}
       </span>
     </div>
-  </RecycleScroller2> -->
+  </RecycleScroller2>
 
   <h1>不定高度虚拟列表实现</h1>
   <RecycleScroller3
