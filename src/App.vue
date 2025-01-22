@@ -1,5 +1,5 @@
 <template>
   <ViewWrapper>
-    <RouterView class="w-full h-full" />
+    <RouterView />
   </ViewWrapper>
 </template>

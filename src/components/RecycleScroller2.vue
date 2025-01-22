@@ -1,36 +1,39 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import { useThrottleFn } from '@vueuse/core';
 
-const props = defineProps<{
+const { items, itemSize, buffer = 0 } = defineProps<{
   items: any[];
   itemSize: number;
-  buffer: number;
+  buffer?: number;
 }>();
 
 const startIndex = ref(0);
 
 const pool = computed(() => {
-  return props.items.slice(startIndex.value, startIndex.value + props.buffer);
+  return items.slice(startIndex.value, startIndex.value + buffer);
 });
 
 const computedTotalHeight = computed(() => {
-  return props.items.length * props.itemSize;
+  return items.length * itemSize;
 });
 
 const computedTop = computed(() => {
-  return startIndex.value * props.itemSize;
+  return startIndex.value * itemSize;
 });
 
 function handleScroll(e: Event) {
-  const target = e.target as HTMLElement
+  const target = e.target as HTMLElement;
   if (target) {
-    startIndex.value = target.scrollTop / props.itemSize;
+    startIndex.value = Math.floor(target.scrollTop / itemSize);
   }
 }
+
+const throttledHandleScroll = useThrottleFn(handleScroll, 200, true)
 </script>
 
 <template>
-  <div class="recycle-scroller" @scroll="handleScroll">
+  <div class="recycle-scroller" @scroll.passive="throttledHandleScroll">
     <div :style="{ height: `${computedTotalHeight}px` }">
       <div :style="{ transform: `translateY(${computedTop}px)` }">
         <template v-for="item in pool">

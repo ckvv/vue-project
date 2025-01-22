@@ -1,35 +1,37 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import { useThrottleFn } from '@vueuse/core';
 
-const props = defineProps<{
+const { items, itemSize, buffer = 0 } = defineProps<{
   items: any[]
   itemSize: number
-  buffer: number
+  buffer?: number
 }>();
 
 const startIndex = ref(0);
 
 const pool = computed(() => {
-  return props.items.slice(startIndex.value, startIndex.value + props.buffer);
+  return items.slice(startIndex.value, startIndex.value + buffer);
 });
 
 const computedPadding = computed(() => {
   return {
-    top: startIndex.value * props.itemSize,
-    bottom: Math.max((props.items.length - props.buffer - startIndex.value), 0) * props.itemSize,
+    top: startIndex.value * itemSize,
+    bottom: Math.max((items.length - buffer - startIndex.value), 0) * itemSize,
   };
 });
 
 function handleScroll(e: Event) {
-  const target = e.target as HTMLElement
+  const target = e.target as HTMLElement;
   if (target) {
-    startIndex.value = target.scrollTop / props.itemSize;
+    startIndex.value = Math.floor(target.scrollTop / itemSize);
   }
 }
+const throttledHandleScroll = useThrottleFn(handleScroll, 200, true)
 </script>
 
 <template>
-  <div class="recycle-scroller" @scroll="handleScroll">
+  <div class="recycle-scroller" @scroll.passive="throttledHandleScroll">
     <div :style="{ paddingTop: `${computedPadding.top}px`, paddingBottom: `${computedPadding.bottom}px` }">
       <slot v-for="item in pool" :item="item" />
     </div>

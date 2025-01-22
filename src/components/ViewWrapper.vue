@@ -16,16 +16,13 @@ const toPath = (path = '/') => {
 
 <template>
   <div class="view-wrapper w-full h-full">
-    <a href="https://github.com/ckvv/vue-project" class="position-fixed top-2 right-2">Github</a>
+    <div class="flex items-center gap-1 position-fixed top-2 right-2">
+      <el-select-v2 :model-value="path" :options="options"
+        placeholder="Please Select Views" filterable @change="toPath" />
+      <a href="https://github.com/ckvv/vue-project">Github</a>
+    </div>
     <slot />
-    <span v-if="route.name !== 'Home'" class="i-b:home text-6 fixed right-2 top-2 hover:cursor-pointer" @click="toPath('/home')" />
-    <el-select-v2
-      class="fixed right-2 bottom-2"
-      :model-value="path"
-      :options="options"
-      placeholder="Please Select Views"
-      filterable
-      @change="toPath"
-    />
+    <span v-if="route.name !== 'Home'" class="i-b:home text-6 fixed right-2 top-2 hover:cursor-pointer"
+      @click="toPath('/home')" />
   </div>
 </template>
