@@ -11,24 +11,23 @@ const ctx = computed(() => {
   });
 });
 
-const controllerFactory = <T = any>(): [Promise<T>, (result: T) => void, (error: any) => void] => {
+function controllerFactory<T = any>(): [Promise<T>, (result: T) => void, (error: any) => void] {
   let success: (result: T) => void, error: (error: any) => void;
   const controller = new Promise<T>((resolve, reject) => {
     success = resolve;
     error = reject;
   });
   return [controller, success!, error!];
-};
+}
 
-const readFile = (file: File): Promise<string> => {
+function readFile(file: File): Promise<string> {
   const [controller, success, error] = controllerFactory();
   const reader = new FileReader();
 
   reader.addEventListener('loadend', (e) => {
     if (e.target?.result) {
       success(e.target.result);
-    }
-    else {
+    } else {
       error(new Error('Read file fail'));
     }
   });
@@ -37,9 +36,9 @@ const readFile = (file: File): Promise<string> => {
   });
   reader.readAsDataURL(file);
   return controller;
-};
+}
 
-const loadImage = (url: string): Promise<HTMLImageElement> => {
+function loadImage(url: string): Promise<HTMLImageElement> {
   const [controller, success, error] = controllerFactory<HTMLImageElement>();
   const img = new Image();
   img.src = url;
@@ -50,9 +49,9 @@ const loadImage = (url: string): Promise<HTMLImageElement> => {
     error(e);
   };
   return controller;
-};
+}
 
-const getImageData = (w: number, h: number) => {
+function getImageData(w: number, h: number) {
   const imageData = new ImageData(w, h);
   const length = imageData.data.length;
   for (let i = 0; i < length; i += 4) {
@@ -74,7 +73,7 @@ const getImageData = (w: number, h: number) => {
   }
 
   return imageData;
-};
+}
 
 onMounted(() => {
   if (ctx.value) {
@@ -82,9 +81,11 @@ onMounted(() => {
   }
 });
 
-const handlerChange = async (e: Event) => {
+async function handlerChange(e: Event) {
   const files = (e.target as HTMLInputElement).files;
-  if (!files?.length) { return; }
+  if (!files?.length) {
+    return;
+  }
 
   const img = await loadImage(await readFile(files[0]));
 
@@ -94,15 +95,15 @@ const handlerChange = async (e: Event) => {
   }
 
   ctx.value?.drawImage(img, 0, 0, img.width, img.height);
-};
+}
 
-const handlerMouseover = (event: MouseEvent) => {
+function handlerMouseover(event: MouseEvent) {
   if (ctx.value && canvasRef.value) {
     const { top, left } = canvasRef.value.getBoundingClientRect();
     // https://developer.mozilla.org/en-US/docs/Web/API/ImageData/data
     color.value = ctx.value.getImageData(event.x - left, event.y - top, 1, 1).data;
   }
-};
+}
 </script>
 
 <template>

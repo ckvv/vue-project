@@ -4,7 +4,7 @@ import { computed, ref } from 'vue';
 const length = ref(10000);
 
 const items = computed(() => {
-  return Array.from({length: length.value}).map((v, index) => ({ id: index, key: index, value: Math.random()}));
+  return Array.from({ length: length.value }).map((v, index) => ({ id: index, key: index, value: Math.random() }));
 });
 </script>
 
@@ -50,7 +50,7 @@ const items = computed(() => {
     :items="items"
     :item-size="24"
   >
-  <div class="color-red" :style="{ height: `${item.value * 100 + 22}px` }">
+    <div class="color-red" :style="{ height: `${item.value * 100 + 22}px` }">
       <span>
         {{ item.id }}: {{ item.value }}
       </span>

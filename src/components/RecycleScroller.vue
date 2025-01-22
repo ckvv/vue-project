@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
 import { useThrottleFn } from '@vueuse/core';
+import { computed, ref } from 'vue';
 
 const { items, itemSize, buffer = 0 } = defineProps<{
-  items: any[]
-  itemSize: number
-  buffer?: number
+  items: any[];
+  itemSize: number;
+  buffer?: number;
 }>();
 
 const startIndex = ref(0);
@@ -27,7 +27,7 @@ function handleScroll(e: Event) {
     startIndex.value = Math.floor(target.scrollTop / itemSize);
   }
 }
-const throttledHandleScroll = useThrottleFn(handleScroll, 200, true)
+const throttledHandleScroll = useThrottleFn(handleScroll, 200, true);
 </script>
 
 <template>

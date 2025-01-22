@@ -1,8 +1,6 @@
 import antfu from '@antfu/eslint-config';
 
 export default antfu({
-  astro: true,
-  markdown: false,
   typescript: true,
   rules: {
     'consistent-list-newline': 'off',

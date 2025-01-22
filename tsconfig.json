@@ -1,20 +1,20 @@
 {
-  "include": [
-    "components.d.ts",
-    "*.d.ts",
-    "package.json",
-    "src/**/*",
-  ],
   "compilerOptions": {
-    "skipLibCheck": true,
-    "moduleResolution": "node",
-    "ignoreDeprecations": "5.0",
-    "module": "ESNext",
     "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "node",
     "paths": {
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "skipLibCheck": true,
+    "ignoreDeprecations": "5.0"
   },
+  "include": [
+    "components.d.ts",
+    "*.d.ts",
+    "package.json",
+    "src/**/*"
+  ]
 }
