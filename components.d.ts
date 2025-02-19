@@ -17,6 +17,7 @@ declare module 'vue' {
     RecycleScroller3: typeof import('./src/components/RecycleScroller3.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Test: typeof import('./src/components/Test.vue')['default']
     ViewWrapper: typeof import('./src/components/ViewWrapper.vue')['default']
   }
 }
