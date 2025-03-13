@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { computed, onMounted, shallowRef } from 'vue';
 
+navigator.mediaDevices.getUserMedia({
+  audio: {
+
+  },
+});
+
 const canvasRef = shallowRef<HTMLCanvasElement>();
 
 const color = shallowRef(new Uint8ClampedArray([0, 0, 0, 0]) as Uint8ClampedArray<ArrayBufferLike>);
@@ -112,6 +118,25 @@ function handlerMouseover(event: MouseEvent) {
       获取图片中的颜色: {{ color }},
       <input id="file" type="file" accept="image/*" @change="handlerChange">
     </div>
-    <canvas id="offscreen" ref="canvasRef" @mousemove="handlerMouseover" />
+    <canvas ref="canvasRef" @mousemove="handlerMouseover" />
+
+    <div class="jian-bian w-100 h-10" />
+    <div class="w-100 h-10" style="background: linear-gradient(to left, hsl(0, 100%, 50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%), hsl(180, 100%, 50%), hsl(240, 100%, 50%), hsl(300, 100%, 50%), hsl(360, 100%, 50%) );" />
+    <div class="w-100 h-10" style="background: linear-gradient(to right, red 0%, orange 20%, yellow 40%, green 60%, blue 80%, indigo 100%);" />
+    <div class="w-100 h-10" style="background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(30, 100%, 50%), hsl(60, 100%, 50%), hsl(90, 100%, 50%), hsl(120, 100%, 50%), hsl(150, 100%, 50%), hsl(180, 100%, 50%), hsl(210, 100%, 50%), hsl(240, 100%, 50%), hsl(270, 100%, 50%), hsl(300, 100%, 50%), hsl(330, 100%, 50%), hsl(360, 100%, 50%) );" />
+    <div class="w-100 h-10" style="background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%), hsl(180, 100%, 50%), hsl(240, 100%, 50%), hsl(300, 100%, 50%), hsl(360, 100%, 50%) );" />
   </div>
 </template>
+
+<style scoped>
+.jian-bian {
+  background: linear-gradient(to right,
+                #ff0000 0%,
+                #ff00ff 17%,
+                #0000ff 33%,
+                #00ffff 50%,
+                #00ff00 67%,
+                #ffff00 83%,
+                #ff0000 100%);
+}
+</style>
